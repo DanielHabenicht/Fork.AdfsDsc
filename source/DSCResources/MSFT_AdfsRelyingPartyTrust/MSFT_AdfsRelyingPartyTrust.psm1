@@ -144,7 +144,7 @@
         Indicates that the request MFA from claims providers option is used.
 
     .PARAMETER RequestSigningCertificate
-        ** Not Currently Implemented **
+        Write - System.Security.Cryptography.X509Certificates.X509Certificate2
         Specifies an array of certificates to be used to verify the signature on a request from the relying party.
 
     .PARAMETER SamlEndpoint
@@ -322,6 +322,7 @@ function Get-TargetResource
             ProtocolProfile                      = $targetResource.ProtocolProfile
             RefreshTokenProtectionEnabled        = $targetResource.RefreshTokenProtectionEnabled
             RequestMFAFromClaimsProviders        = $targetResource.RequestMFAFromClaimsProviders
+            RequestSigningCertificate            = $targetResource.RequestSigningCertificate
             SamlEndpoint                         = @($SamlEndpoint)
             SamlResponseSignature                = $targetResource.SamlResponseSignature
             SignatureAlgorithm                   = $targetResource.SignatureAlgorithm
@@ -367,6 +368,7 @@ function Get-TargetResource
             ProtocolProfile                      = 'SAML'
             RefreshTokenProtectionEnabled        = $false
             RequestMFAFromClaimsProviders        = $false
+            RequestSigningCertificate            = @()
             SamlEndpoint                         = $null
             SamlResponseSignature                = 'AssertionOnly'
             SignatureAlgorithm                   = 'http://www.w3.org/2000/09/xmldsig#rsa-sha1'
@@ -536,6 +538,10 @@ function Set-TargetResource
         [Parameter()]
         [System.Boolean]
         $RequestMFAFromClaimsProviders,
+
+        [Parameter()]
+        [System.Security.Cryptography.X509Certificates.X509Certificate2]
+        $RequestSigningCertificate,
 
         [Parameter()]
         [Microsoft.Management.Infrastructure.CimInstance[]]
@@ -967,6 +973,10 @@ function Test-TargetResource
         [Parameter()]
         [System.Boolean]
         $RequestMFAFromClaimsProviders,
+
+        [Parameter()]
+        [System.Security.Cryptography.X509Certificates.X509Certificate2]
+        $RequestSigningCertificate
 
         [Parameter()]
         [Microsoft.Management.Infrastructure.CimInstance[]]
